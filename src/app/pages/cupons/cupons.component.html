@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-4 btns-filters">
-                        <div data-intro='Você pode filtrar os cupons pelo tipo Geral, Único e todos.'>
+                        <div data-intro='Você pode filtrar os cupons pelo tipo Geral, Único e Todos.'>
                             <button class="btn-primary-outline" [class.active]="isActive('Todos')" (click)="selecionarTipo('Todos')">Todos</button>
                             <button class="btn-primary-outline" [class.active]="isActive('Geral')" (click)="selecionarTipo('Geral')">Geral</button>
                             <button class="btn-primary-outline" [class.active]="isActive('Único')" (click)="selecionarTipo('Único')">Único</button>
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="box-content box-table" data-intro='Aqui você pode visualizar os Cupons cadastrados.'>
+            <div class="box-content box-table" data-intro='Você também pode visualizar os Cupons cadastrados.'>
                 <table class="custom-table" *ngIf="cupons && cupons.length > 0">
                     <thead>
                         <tr>
@@ -168,7 +168,7 @@
         </div>
 
         <div class="col-sm-12 col-md-4">
-            <div class="box-content container-analise" data-intro='Aqui você pode acompanhar a analise do uso dos seus Cupons.'>   
+            <div class="box-content container-analise" data-intro='Acompanhe a análise do uso dos seus cupons.'>   
                 <div>
                     <p class="s-title">Analise de Uso</p>
                     <div class="box-chart">
