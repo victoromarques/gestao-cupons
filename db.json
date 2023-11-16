@@ -1,0 +1,28 @@
+{
+  "cupons": [
+    {
+      "codigo": "9LMHJP",
+      "desconto": 15,
+      "tipo": "Geral",
+      "pedidoMinimo": 75,
+      "dataLimite": "2023-11-30",
+      "id": 11
+    },
+    {
+      "codigo": "PAKN53",
+      "desconto": 5,
+      "tipo": "Único",
+      "pedidoMinimo": 60,
+      "dataLimite": "2023-11-16",
+      "id": 12
+    },
+    {
+      "codigo": "J7EHIE",
+      "desconto": 5.9,
+      "tipo": "Geral",
+      "pedidoMinimo": 50,
+      "dataLimite": "2023-11-30",
+      "id": 13
+    }
+  ]
+}

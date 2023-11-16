@@ -1,0 +1,126 @@
+.container{
+    padding-top: 90px;
+}
+
+.box-content{
+    border-radius: 10px;
+    background-color: #fff;
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+}
+
+.container-analise{
+    min-height: 97.5%;
+}
+
+.btns-filters{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btns-filters button:nth-child(2){
+    margin: 0 10px;
+}
+
+.box-table{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-x: auto;
+    min-height: 60vh;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.not-cupom-box{
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.not-cupom-box content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #edf2f5;
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.not-cupom-box h4{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #606060;
+}
+
+.not-cupom-box p{
+    margin-top: -10px;
+    font-size: 12px;
+    text-align: center;
+    color: #606060;
+}
+
+.box-faturamentos .row .box-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #606060;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin-top: 6px;
+}
+
+.box-faturamentos .row .box-info .price{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.box-faturamentos .row .box-info .price h3{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 0;
+}
+
+.box-faturamentos .row .box-info .price p{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.box-info:nth-child(2){
+    margin-right: 10px;
+}
+
+.box-chart{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#uso-chart{
+    margin-bottom: 15px;
+    width: 250px!important;
+    height: 250px!important;
+}
+
+.invalid-tooltip{
+    display: flex!important;
+}
+
+@media (max-width: 430px){
+    .btns-filters{
+        margin-top: 5px;
+    }
+}

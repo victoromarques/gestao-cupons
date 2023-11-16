@@ -1,0 +1,255 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-sm-12 col-md-8">
+            <div class="box-content actions-list">
+                <div class="row">
+
+                    <div class="col-sm-12 col-md-8">
+                        <button class="btn-primary" data-intro='Aqui você pode adicionar um novo Cupom!' data-bs-toggle="modal" data-bs-target="#modalNovoCupom">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 27.552 27.552">
+                                <path id="plus_1_" data-name="plus (1)" d="M13.776,0A13.776,13.776,0,1,0,27.552,13.776,13.791,13.791,0,0,0,13.776,0ZM19.8,14.924H14.924V19.8a1.148,1.148,0,1,1-2.3,0V14.924H7.749a1.148,1.148,0,0,1,0-2.3h4.879V7.749a1.148,1.148,0,0,1,2.3,0v4.879H19.8a1.148,1.148,0,1,1,0,2.3Zm0,0" fill="#fff"/>
+                            </svg>                          
+                            Novo Cupom
+                        </button>
+                    </div>
+  
+                    <!-- Modal Novo Cupom -->
+                    <div class="modal fade" id="modalNovoCupom" tabindex="-1" aria-labelledby="novocupomModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="novocupomModalLabel">Novo cupom</h1>
+                                    <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form class="needs-validation" (ngSubmit)="adicionarCupom()" #form="ngForm">
+                                    <div class="modal-body row g-3">
+
+                                        <div class="col-md-12">
+                                            <label for="codigo" class="form-label">Código</label>
+                                            <div class="input-group has-validation">
+                                              <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="novoCupom.codigo" required #codigo="ngModel">
+                                              <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="invalid-tooltip">
+                                                Código é obrigatório.
+                                              </div>
+                                              <button type="button" class="btn btn-secondary" (click)="gerarCodigoAleatorio()">Gerar Código</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <label for="desconto" class="form-label">Desconto</label>
+                                            <div class="input-group has-validation">
+                                              <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="desconto" 
+                                                name="desconto" 
+                                                maxlength="15"
+                                                [(ngModel)]="novoCupom.desconto" 
+                                                required 
+                                                #descontoInput="ngModel"
+                                                (input)="mascaraMoeda($event)"
+                                              >
+                                              <div *ngIf="descontoInput.invalid && (descontoInput.dirty || descontoInput.touched)" class="invalid-tooltip">
+                                                Desconto é obrigatório.
+                                              </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="pedidoMinimo" class="form-label">Pedido mínimo</label>
+                                            <div class="input-group has-validation">
+                                              <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="pedidoMinimo" 
+                                                name="pedidoMinimo" 
+                                                maxlength="15"
+                                                [(ngModel)]="novoCupom.pedidoMinimo" 
+                                                required 
+                                                #pedidoMinimo="ngModel"
+                                                (input)="mascaraMoeda($event)"
+                                              >
+                                              <div *ngIf="pedidoMinimo.invalid && (pedidoMinimo.dirty || pedidoMinimo.touched)" class="invalid-tooltip">
+                                                Pedido mínimo é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="tipo" class="form-label">Tipo</label>
+                                            <div class="input-group has-validation">
+                                                <select class="form-select" id="tipo" name="tipo" [(ngModel)]="novoCupom.tipo" required #tipo="ngModel">
+                                                    <option value="Geral" selected>Geral</option>
+                                                    <option value="Único">Único</option>
+                                                </select>
+                                                <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="invalid-tooltip">
+                                                    Tipo é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="dataLimite" class="form-label">Data Limite</label>
+                                            <div class="input-group has-validation">
+                                                <input type="date" class="form-control" id="dataLimite" name="dataLimite" [(ngModel)]="novoCupom.dataLimite" required #dataLimite="ngModel">
+                                                <div *ngIf="dataLimite.invalid && (dataLimite.dirty || dataLimite.touched)" class="invalid-tooltip">
+                                                    Data Limite é obrigatória.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-primary" [disabled]="form.invalid">Adicionar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 btns-filters">
+                        <div data-intro='Você pode filtrar os cupons pelo tipo Geral, Único e todos.'>
+                            <button class="btn-primary-outline" [class.active]="isActive('Todos')" (click)="selecionarTipo('Todos')">Todos</button>
+                            <button class="btn-primary-outline" [class.active]="isActive('Geral')" (click)="selecionarTipo('Geral')">Geral</button>
+                            <button class="btn-primary-outline" [class.active]="isActive('Único')" (click)="selecionarTipo('Único')">Único</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-content box-table" data-intro='Aqui você pode visualizar os Cupons cadastrados.'>
+                <table class="custom-table" *ngIf="cupons && cupons.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Desconto</th>
+                            <th>Tipo</th>
+                            <th>Pedido mínimo</th>
+                            <th>Vezes usado</th>
+                            <th>Data limite</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cupom of cupons">
+                            <td>{{ cupom.codigo }}</td>
+                            <td>{{ cupom.desconto | moedaBRL }}</td>
+                            <td>{{ cupom.tipo }}</td>
+                            <td>{{ cupom.pedidoMinimo | moedaBRL }}</td>
+                            <td>0</td>
+                            <td>{{ cupom.dataLimite | date: 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <button class="btn-circle-primary" (click)="handleDeleteCopom(cupom.id)">
+                                    <svg id="trash" xmlns="http://www.w3.org/2000/svg" width="13" viewBox="0 0 14.97 18.424">
+                                        <path id="Caminho_4" data-name="Caminho 4" d="M61.53,2.3H58.364V1.727A1.727,1.727,0,0,0,56.636,0h-2.3a1.727,1.727,0,0,0-1.727,1.727V2.3H49.439A1.439,1.439,0,0,0,48,3.742V4.894a.576.576,0,0,0,.576.576H62.394a.576.576,0,0,0,.576-.576V3.742A1.439,1.439,0,0,0,61.53,2.3Zm-7.773-.576a.577.577,0,0,1,.576-.576h2.3a.577.577,0,0,1,.576.576V2.3H53.758Z" transform="translate(-48)" fill="#fff"/>
+                                        <path id="Caminho_5" data-name="Caminho 5" d="M73.544,184a.18.18,0,0,0-.18.188l.475,9.969a1.725,1.725,0,0,0,1.725,1.645h8.744a1.725,1.725,0,0,0,1.725-1.645l.475-9.969a.18.18,0,0,0-.18-.188Zm8.7,1.439a.576.576,0,1,1,1.152,0v7.485a.576.576,0,1,1-1.152,0Zm-2.879,0a.576.576,0,1,1,1.152,0v7.485a.576.576,0,1,1-1.152,0Zm-2.879,0a.576.576,0,1,1,1.152,0v7.485a.576.576,0,1,1-1.152,0Z" transform="translate(-72.451 -177.379)" fill="#fff"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="not-cupom-box" *ngIf="!cupons || cupons.length === 0">
+                    <content>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="54.567" height="54.567" viewBox="0 0 54.567 54.567">
+                            <g id="cupom" transform="translate(0 0)">
+                                <path id="Caminho_1" data-name="Caminho 1" d="M369.893,200.154a1.6,1.6,0,1,0,0,2.261A1.6,1.6,0,0,0,369.893,200.154Zm0,0" transform="translate(-328.033 -178.405)" fill="#606060"/>
+                                <path id="Caminho_2" data-name="Caminho 2" d="M200.189,200.152a1.6,1.6,0,1,0,0,2.261A1.6,1.6,0,0,0,200.189,200.152Zm0,0" transform="translate(-176.416 -178.402)" fill="#606060"/>
+                                <path id="Caminho_3" data-name="Caminho 3" d="M35.078,1.4a4.8,4.8,0,0,0-6.783,0L7.735,21.963a1.6,1.6,0,0,0,0,2.261l4.522,4.522A1.6,1.6,0,1,1,10,31.007L5.474,26.485a1.6,1.6,0,0,0-2.261,0L1.4,28.3a4.8,4.8,0,0,0,0,6.782L19.49,53.164a4.8,4.8,0,0,0,6.782,0l1.811-1.811a1.6,1.6,0,0,0,0-2.261l-4.522-4.522a1.6,1.6,0,0,1,2.261-2.261l4.522,4.522a1.6,1.6,0,0,0,2.261,0l20.56-20.56a4.8,4.8,0,0,0,0-6.783ZM21.3,40.05a1.6,1.6,0,0,1-2.261,0l-4.522-4.522a1.6,1.6,0,0,1,2.261-2.261L21.3,37.789A1.6,1.6,0,0,1,21.3,40.05Zm4.735-13.778a4.8,4.8,0,1,1,0-6.782A4.8,4.8,0,0,1,26.035,26.271Zm8.226,9.481A1.6,1.6,0,0,1,32.38,34.5L27.859,11.89a1.6,1.6,0,1,1,3.135-.627l4.522,22.608a1.6,1.6,0,0,1-1.254,1.881Zm9.86-9.481a4.8,4.8,0,1,1,0-6.782A4.8,4.8,0,0,1,44.122,26.271Zm0,0" fill="#606060"/>
+                            </g>
+                        </svg>
+                        <h4>Oops, nenhum cupom encontrado!</h4>
+                        <p>Não foi encontrado nenhum registro para o tipo: <b>{{ filtroTipo }}</b></p>
+                    </content>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <div class="box-content container-analise" data-intro='Aqui você pode acompanhar a analise do uso dos seus Cupons.'>   
+                <div>
+                    <p class="s-title">Analise de Uso</p>
+                    <div class="box-chart">
+                        <canvas id="uso-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="box-faturamentos">
+                    <p class="s-title">Faturamentos realizados com cupons</p>
+
+                    <div class="row g-0">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box-info me-md-1">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 43.587 43.587">
+                                        <g id="cupom" transform="translate(0)">
+                                            <path id="Caminho_1" data-name="Caminho 1" d="M369.344,200.06a1.277,1.277,0,1,0,0,1.806A1.278,1.278,0,0,0,369.344,200.06Zm0,0" transform="translate(-335.906 -182.687)" fill="#fff"/>
+                                            <path id="Caminho_2" data-name="Caminho 2" d="M199.64,200.058a1.277,1.277,0,1,0,0,1.806A1.277,1.277,0,0,0,199.64,200.058Zm0,0" transform="translate(-180.65 -182.684)" fill="#fff"/>
+                                            <path id="Caminho_3" data-name="Caminho 3" d="M28.02,1.12a3.835,3.835,0,0,0-5.418,0L6.179,17.544a1.276,1.276,0,0,0,0,1.806l3.612,3.612a1.277,1.277,0,1,1-1.806,1.806L4.373,21.155a1.277,1.277,0,0,0-1.806,0L1.121,22.6a3.835,3.835,0,0,0,0,5.417L15.568,42.467a3.835,3.835,0,0,0,5.417,0l1.447-1.446a1.276,1.276,0,0,0,0-1.806L18.82,35.6A1.277,1.277,0,0,1,20.626,33.8l3.612,3.612a1.276,1.276,0,0,0,1.806,0L42.467,20.985a3.835,3.835,0,0,0,0-5.418ZM17.014,31.991a1.276,1.276,0,0,1-1.806,0L11.6,28.379A1.277,1.277,0,1,1,13.4,26.573l3.612,3.612A1.276,1.276,0,0,1,17.014,31.991ZM20.8,20.985a3.831,3.831,0,1,1,0-5.417A3.835,3.835,0,0,1,20.8,20.985Zm6.571,7.573a1.276,1.276,0,0,1-1.5-1L22.253,9.5a1.277,1.277,0,1,1,2.5-.5l3.612,18.059a1.278,1.278,0,0,1-1,1.5Zm7.876-7.573a3.831,3.831,0,1,1,0-5.417A3.835,3.835,0,0,1,35.244,20.985Zm0,0" transform="translate(0 0)" fill="#fff"/>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div class="price">
+                                    <h3>R$690,90</h3>
+                                    <p>Único</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="box-info ms-md-1">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 43.587 43.587">
+                                        <g id="cupom" transform="translate(0)">
+                                            <path id="Caminho_1" data-name="Caminho 1" d="M369.344,200.06a1.277,1.277,0,1,0,0,1.806A1.278,1.278,0,0,0,369.344,200.06Zm0,0" transform="translate(-335.906 -182.687)" fill="#fff"/>
+                                            <path id="Caminho_2" data-name="Caminho 2" d="M199.64,200.058a1.277,1.277,0,1,0,0,1.806A1.277,1.277,0,0,0,199.64,200.058Zm0,0" transform="translate(-180.65 -182.684)" fill="#fff"/>
+                                            <path id="Caminho_3" data-name="Caminho 3" d="M28.02,1.12a3.835,3.835,0,0,0-5.418,0L6.179,17.544a1.276,1.276,0,0,0,0,1.806l3.612,3.612a1.277,1.277,0,1,1-1.806,1.806L4.373,21.155a1.277,1.277,0,0,0-1.806,0L1.121,22.6a3.835,3.835,0,0,0,0,5.417L15.568,42.467a3.835,3.835,0,0,0,5.417,0l1.447-1.446a1.276,1.276,0,0,0,0-1.806L18.82,35.6A1.277,1.277,0,0,1,20.626,33.8l3.612,3.612a1.276,1.276,0,0,0,1.806,0L42.467,20.985a3.835,3.835,0,0,0,0-5.418ZM17.014,31.991a1.276,1.276,0,0,1-1.806,0L11.6,28.379A1.277,1.277,0,1,1,13.4,26.573l3.612,3.612A1.276,1.276,0,0,1,17.014,31.991ZM20.8,20.985a3.831,3.831,0,1,1,0-5.417A3.835,3.835,0,0,1,20.8,20.985Zm6.571,7.573a1.276,1.276,0,0,1-1.5-1L22.253,9.5a1.277,1.277,0,1,1,2.5-.5l3.612,18.059a1.278,1.278,0,0,1-1,1.5Zm7.876-7.573a3.831,3.831,0,1,1,0-5.417A3.835,3.835,0,0,1,35.244,20.985Zm0,0" transform="translate(0 0)" fill="#fff"/>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div class="price">
+                                    <h3>R$6.960,90</h3>
+                                    <p>Geral</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12">
+                            <div class="box-info mt-md-2">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 44.954 44.956">
+                                        <g id="Page-1" transform="translate(0 0)">
+                                          <g id="_059---Money-Bag" data-name="059---Money-Bag" transform="translate(0 0)">
+                                            <path id="Shape" d="M12.831,22.769a9.142,9.142,0,0,1-4.415.988A9.142,9.142,0,0,1,4,22.769V40.676a11.913,11.913,0,0,1,1.2-.06,9.142,9.142,0,0,1,4.415.988V35.8c0-1.284,1.272-2.341,3.211-2.862Z" transform="translate(-0.789 -4.491)" fill="#fff"/>
+                                            <ellipse id="Oval" cx="4.5" cy="1.5" rx="4.5" ry="1.5" transform="translate(0 37.956)" fill="#fff"/>
+                                            <path id="Shape-2" data-name="Shape" d="M0,51.769V53.56c0,.642,1.76,1.606,4.415,1.606S8.831,54.2,8.831,53.56V51.769a9.142,9.142,0,0,1-4.415.988A9.142,9.142,0,0,1,0,51.769Z" transform="translate(0 -10.21)" fill="#fff"/>
+                                            <path id="Shape-3" data-name="Shape" d="M28.843,7.329a3.458,3.458,0,0,0,2.058.693,17.375,17.375,0,0,1-1.64-3.793A.8.8,0,1,1,30.807,3.8a14.866,14.866,0,0,0,2.025,4.23h.825A14.727,14.727,0,0,0,35.682,3.8a.8.8,0,1,1,1.548.43,17.363,17.363,0,0,1-1.638,3.79,3.443,3.443,0,0,0,2.015-.69,8.211,8.211,0,0,0,2.755-5.507.736.736,0,0,0-.343-.735.834.834,0,0,0-.911,0,3.4,3.4,0,0,1-1.879.519A3.62,3.62,0,0,1,34.723.626a2.113,2.113,0,0,0-3,0,3.623,3.623,0,0,1-2.5.979,3.382,3.382,0,0,1-1.87-.515.852.852,0,0,0-.454-.134.865.865,0,0,0-.461.135.734.734,0,0,0-.341.733,8.223,8.223,0,0,0,2.754,5.505Z" transform="translate(-5.144 0)" fill="#fff"/>
+                                            <ellipse id="Oval-2" data-name="Oval" cx="4.5" cy="1.5" rx="4.5" ry="1.5" transform="translate(8 2.956)" fill="#fff"/>
+                                            <ellipse id="Oval-3" data-name="Oval" cx="4.5" cy="2" rx="4.5" ry="2" transform="translate(3 13.956)" fill="#fff"/>
+                                            <path id="Shape-4" data-name="Shape" d="M46.3,27.6c-2.612-11.087-9.587-15.623-11.709-16.771a5.072,5.072,0,0,1-1.231.413l1.491,1.391a.8.8,0,1,1-1.1,1.174l-2.622-2.448h-.257v2.408a.8.8,0,0,1-1.606,0V11.362h-.257L26.392,13.81a.8.8,0,0,1-1.1-1.174l1.483-1.383a5.089,5.089,0,0,1-1.239-.412,21.1,21.1,0,0,0-5.328,4.27l-.018.021a24.337,24.337,0,0,0-1.652,2.011.8.8,0,0,1-1.294-.95c.524-.714,1.056-1.359,1.585-1.951V8.767a9.142,9.142,0,0,1-4.415.99A9.142,9.142,0,0,1,10,8.769v5.815c3.23.1,5.619,1.445,5.619,3.2v12.1a11.912,11.912,0,0,1,1.2-.06c3.432,0,6.021,1.381,6.021,3.211v8.831h14.6c.839,0,5.151-.161,7.636-3.291C47.026,36.12,47.435,32.428,46.3,27.6Zm-12.216-.184a3.211,3.211,0,0,1-3.211,3.211v.8a.8.8,0,0,1-1.606,0v-.8a3.211,3.211,0,0,1-3.211-3.211.8.8,0,0,1,1.606,0,1.606,1.606,0,0,0,1.606,1.606V25.812a3.211,3.211,0,1,1,0-6.422v-.8a.8.8,0,0,1,1.606,0v.8A3.211,3.211,0,0,1,34.083,22.6a.8.8,0,0,1-1.606,0A1.606,1.606,0,0,0,30.872,21v3.211A3.211,3.211,0,0,1,34.083,27.418Zm9.742,10.158c-2.026,2.558-5.668,2.687-6.378,2.687a.8.8,0,0,1,0-1.606c.58,0,3.552-.1,5.119-2.078A6.148,6.148,0,0,0,43.7,33a.813.813,0,0,1,.841-.763.8.8,0,0,1,.763.841,7.707,7.707,0,0,1-1.474,4.5Z" transform="translate(-1.972 -1.729)" fill="#fff"/>
+                                            <path id="Shape-5" data-name="Shape" d="M32,25.606a1.606,1.606,0,0,0,1.606,1.606V24A1.606,1.606,0,0,0,32,25.606Z" transform="translate(-6.311 -4.733)" fill="#fff"/>
+                                            <path id="Shape-6" data-name="Shape" d="M36,33.211A1.606,1.606,0,0,0,36,30Z" transform="translate(-7.1 -5.917)" fill="#fff"/>
+                                            <path id="Shape-7" data-name="Shape" d="M13,41.769v8.213c0,.642,1.76,1.606,4.415,1.606s4.415-.963,4.415-1.606V41.769a9.142,9.142,0,0,1-4.415.988A9.142,9.142,0,0,1,13,41.769Z" transform="translate(-2.564 -8.238)" fill="#fff"/>
+                                            <ellipse id="Oval-4" data-name="Oval" cx="4.5" cy="1.5" rx="4.5" ry="1.5" transform="translate(10 29.956)" fill="#fff"/>
+                                            <path id="Shape-8" data-name="Shape" d="M46.655,6.079c0,1.317-1.429,2.392-3.211,2.408a4.094,4.094,0,0,1-.891-.1.6.6,0,0,1-.153.136c.128.08.273.169.425.257.49.321,1.06.714,1.686,1.2.064.048.12.1.185.153,4,.3,5.266,1.967,5.306,2.015a.8.8,0,0,0,.666.345.754.754,0,0,0,.442-.136.8.8,0,0,0,.225-1.108c-.064-.1-1.172-1.686-4.407-2.416A3.67,3.67,0,0,0,48.26,6.079,4.142,4.142,0,0,0,45.186,2.33a1.087,1.087,0,0,1-.016.161A12.308,12.308,0,0,1,44.9,3.944a2.452,2.452,0,0,1,1.758,2.135Z" transform="translate(-8.362 -0.46)" fill="#fff"/>
+                                          </g>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div class="price">
+                                    <h3>R$7.651,80</h3>
+                                    <p>Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

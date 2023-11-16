@@ -1,0 +1,45 @@
+header{
+    width: 100%;
+    padding: 10px 0;
+    background-color: #FE4902;
+    position: fixed;
+}
+
+header .content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo h3{
+    color: #fff;
+    line-height: 14px;
+    font-size: 14px;
+    margin-left: 6px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.help{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.help:hover{
+    opacity: 0.6;
+}
+
+.help h3{
+    color: #fff;
+    line-height: 13px;
+    font-size: 13px;
+    margin-left: 6px;
+    margin-top: 5px;
+}
