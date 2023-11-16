@@ -6,21 +6,21 @@ Este é um projeto de Gestão de Cupons desenvolvido em Angular 13. Permite a cr
 #Pré-requisitos
 Certifique-se de ter o Angular CLI instalado antes de começar.
 
-npm install -g @angular/cli@13
+`npm install -g @angular/cli@13`
 
-Instalação
+#Instalação
 Após instalar o Angular CLI, clone o repositório e instale as dependências do projeto.
 
-git clone https://github.com/victoromarques/gestao-cupons.git
+`git clone https://github.com/victoromarques/gestao-cupons.git
 cd gestao-cupons
-npm install
+npm install`
 
-Inicialização em Modo de Desenvolvimento
+#Inicialização em Modo de Desenvolvimento
 Para iniciar o projeto em modo de desenvolvimento, utilize o seguinte comando:
 
-npm run dev
+`npm run dev`
 
 Isso iniciará o servidor de desenvolvimento e o projeto estará acessível em http://localhost:4200.
 
-Uso
+#Uso
 Após iniciar o projeto em modo de desenvolvimento, abra seu navegador e acesse http://localhost:4200 para interagir com o sistema de Gestão de Cupons.
