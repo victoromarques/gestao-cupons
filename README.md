@@ -1,5 +1,6 @@
 # Projeto Gestão de Cupons - Angular 13
 
+![preview](https://github.com/victoromarques/gestao-cupons/assets/23224675/6c058a85-af9c-4613-b4f8-c3f1e86ccb42)
 
 
 # Descrição
