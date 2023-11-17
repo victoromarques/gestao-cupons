@@ -5,8 +5,8 @@
             <div class="box-content actions-list">
                 <div class="row">
 
-                    <div class="col-sm-12 col-md-8">
-                        <button class="btn-primary" data-intro='Aqui você pode adicionar um novo Cupom!' data-bs-toggle="modal" data-bs-target="#modalNovoCupom">
+                    <div class="col-sm-12 col-md-7">
+                        <button class="btn-primary" data-intro='Aqui você pode cadastrar um novo Cupom!' data-bs-toggle="modal" data-bs-target="#modalNovoCupom">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 27.552 27.552">
                                 <path id="plus_1_" data-name="plus (1)" d="M13.776,0A13.776,13.776,0,1,0,27.552,13.776,13.791,13.791,0,0,0,13.776,0ZM19.8,14.924H14.924V19.8a1.148,1.148,0,1,1-2.3,0V14.924H7.749a1.148,1.148,0,0,1,0-2.3h4.879V7.749a1.148,1.148,0,0,1,2.3,0v4.879H19.8a1.148,1.148,0,1,1,0,2.3Zm0,0" fill="#fff"/>
                             </svg>                          
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-4 btns-filters">
+                    <div class="col-sm-12 col-md-5 btns-filters">
                         <div data-intro='Você pode filtrar os cupons pelo tipo Geral, Único e Todos.'>
                             <button class="btn-primary-outline" [class.active]="isActive('Todos')" (click)="selecionarTipo('Todos')">Todos</button>
                             <button class="btn-primary-outline" [class.active]="isActive('Geral')" (click)="selecionarTipo('Geral')">Geral</button>
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="box-content box-table" data-intro='Você também pode visualizar os Cupons cadastrados.'>
+            <div class="box-content box-table" data-intro='Você também pode visualizar os cupons cadastrados e deletar algum, caso seja necessário.'>
                 <table class="custom-table" *ngIf="cupons && cupons.length > 0">
                     <thead>
                         <tr>
@@ -168,7 +168,7 @@
         </div>
 
         <div class="col-sm-12 col-md-4">
-            <div class="box-content container-analise" data-intro='Acompanhe a análise do uso dos seus cupons.'>   
+            <div class="box-content container-analise" data-intro='Mantenha-se atualizado sobre a análise de utilização dos seus cupons.'>   
                 <div>
                     <p class="s-title">Analise de Uso</p>
                     <div class="box-chart">
@@ -180,8 +180,8 @@
                     <p class="s-title">Faturamentos realizados com cupons</p>
 
                     <div class="row g-0">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box-info me-md-1">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="box-info me-lg-1">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 43.587 43.587">
                                         <g id="cupom" transform="translate(0)">
@@ -199,8 +199,8 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6">
-                            <div class="box-info ms-md-1">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="box-info ms-lg-1">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 43.587 43.587">
                                         <g id="cupom" transform="translate(0)">

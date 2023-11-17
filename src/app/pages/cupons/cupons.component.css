@@ -70,6 +70,10 @@
     color: #606060;
 }
 
+.box-faturamentos{
+    margin-top: 60px;
+}
+
 .box-faturamentos .row .box-info{
     display: flex;
     flex-direction: row;
